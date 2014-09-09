@@ -1,0 +1,76 @@
+fullname: Android
+description: The Android assistant will help you to install Android IDE environment and develop application from Android devices
+
+dependencies:
+- rpm: ['ant'] # For building android applications
+#- rpm: ['zlib.i686', 'libstdc++.i686', 'ncurses-libs.i686', 'SDL.i686', 'libX11.i686', 'libXrandr.i686'] # For compilation/java errors
+- rpm: ['android-tools'] # ADB is required
+#- rpm: ['ncurses-libs.i686'] # For installation compiled app
+
+args:
+  name:
+    use: common_args
+  sdk:
+    flags:
+    - --sdk
+    help:
+        'This will execute Android SDK Manager for downloading other APIs and System Images'
+    action:
+        'store_true'
+  avd:
+    flags:
+    - --avd
+    help:
+        'This will execute Android AVD Manager for creation a virtual device'
+    action:
+        'store_true'
+files:
+  android_sources: &android_sources
+    source: .
+
+run:
+- $pwd~: $(pwd)
+- $home~: $(echo $HOME)
+- $dirname~: $(dirname "$name")
+- $basename~: $(basename "$name")
+- $version: "android-studio-bundle-135.1339820-linux.tgz"
+- $url: "https://dl.google.com/android/studio/install/0.8.6"
+- cl: cd ~/
+- if not $(ls "$version"):
+    - log_i: "Android studio was not found on system."
+    - $confirmed~:
+      - ask_confirm:
+          message: "Downloading android studio takes a time. Do you want to continue?"
+          prompt:  "Select"
+    - if not $confirmed:
+      - log_e: "Aborted by user, exiting"
+    - log_i: "Downloading android studio from $url/$version"
+    - cl: curl --progress-bar -o ~/$version $url/$version
+    - log_i: "Downloading done"
+    - cl: tar -xzf $version
+- cl: cd "$pwd"
+- if defined $sdk:
+    - log_i: 'Running Android SDK Manager for update development tools'
+    - log_i: 'Select at least one System Image from API 20 e.g.'
+    - cl: $home/android-studio/sdk/tools/android sdk
+- if defined $avd:
+    - log_i: 'Running Android AVD Manager for creation at least one virtual device.'
+    - cl: $home/android-studio/sdk/tools/android avd
+- if not $(ls "$pwd/$basename"):
+  - cl: mkdir -p "$pwd/$basename"
+  - log_i: 'Copy android template project to project destination'
+  - log_i: '$dirname'
+  - cl_i: cp -r *android_sources "$basename"
+  - dda_c: "$basename"
+  - cl: cd "$basename"
+  - cl: mv MyApplication.iml $basename.iml
+  - cl: sed -i "s|MyApplication|$basename|" app/build/intermediates/incremental/mergeResources/debug/merger.xml
+  - cl: sed -i "s|MyApplication|$basename|" app/build/intermediates/res/debug/values/values.xml
+  - cl: sed -i "s|MyApplication|$basename|" app/src/main/res/values/strings.xml
+  - use: git_init_add_commit.run
+- else:
+  - cl: cd "$basename"
+  - log_i: 'Project already exists'
+
+- log_i: "For import project into Android Studio executed command:"
+- log_i: "$home/android-studio/bin/studio.sh $basename/build.gradle"
