@@ -3,9 +3,11 @@ description: The Android assistant will help you to install Android IDE environm
 
 dependencies:
 - rpm: ['ant'] # For building android applications
-#- rpm: ['zlib.i686', 'libstdc++.i686', 'ncurses-libs.i686', 'SDL.i686', 'libX11.i686', 'libXrandr.i686'] # For compilation/java errors
+# Packages needed for Android SDK
+- rpm: ['glibc.i686', 'glibc-devel.i686']
+- rpm: ['zlib-devel.i686', 'libstdc++.i686', 'ncurses-devel.i686', 'SDL.i686' ]
+- rpm: ['libX11-devel.i686', 'libXrandr.i686', 'libXrender.i686' ]
 - rpm: ['android-tools'] # ADB is required
-#- rpm: ['ncurses-libs.i686'] # For installation compiled app
 
 args:
   name:
@@ -24,6 +26,14 @@ args:
         'This will execute Android AVD Manager for creation a virtual device'
     action:
         'store_true'
+  rpm:
+    flags:
+    - --rpm
+    help:
+        'This will create Android Studion rpm package which can be installed'
+    action:
+        'store_true'
+
 files:
   android_sources: &android_sources
     source: .
