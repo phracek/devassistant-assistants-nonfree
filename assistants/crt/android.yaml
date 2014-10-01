@@ -6,7 +6,8 @@ dependencies:
 # Packages needed for Android SDK
 - rpm: ['glibc.i686', 'glibc-devel.i686']
 - rpm: ['zlib-devel.i686', 'libstdc++.i686', 'ncurses-devel.i686', 'SDL.i686' ]
-- rpm: ['libX11-devel.i686', 'libXrandr.i686', 'libXrender.i686' ]
+- rpm: ['libX11-devel.i686', 'libXrandr.i686', 'libXrender.i686' , 'xz-libs.i686', 'libXxf86vm']
+- rpm: ['libXdamage.i686', 'libXfixes.i686']
 - rpm: ['android-tools'] # ADB is required
 
 args:
@@ -26,13 +27,13 @@ args:
         'This will execute Android AVD Manager for creation a virtual device'
     action:
         'store_true'
-  rpm:
-    flags:
-    - --rpm
-    help:
-        'This will create Android Studion rpm package which can be installed'
-    action:
-        'store_true'
+#  rpm:
+#    flags:
+#    - --rpm
+#    help:
+#        'This will create Android Studion rpm package which can be installed'
+#    action:
+#        'store_true'
 
 files:
   android_sources: &android_sources
