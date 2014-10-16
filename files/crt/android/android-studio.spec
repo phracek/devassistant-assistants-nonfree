@@ -5,7 +5,7 @@
 Name:		android-studio
 Version:	135.1339820
 Release:	1%{?dist}
-Summary:	Short summary up to 80 characters
+Summary:	Android development environment based on IntelliJ IDEA
 Group:		Development/Libraries
 License:	FIXME
 URL:		http://your.project.com
