@@ -13,7 +13,18 @@ Source0:	%{name}-bundle-%{version}-%{distro}.tgz
 Source1:	android-studio.xml
 Source2:	android-studio.desktop
 BuildRequires: chrpath
-Requires:	java
+Requires:   java-devel
+Requires:   glibc(%{__isa_name}-32)
+Requires:   glibc(%{__isa_name}-32)
+Requires:   libstdc++(%{__isa_name}-32)
+Requires:   zlib-devel(%{__isa_name}-32)
+Requires:   ncurses-devel(%{__isa_name}-32)
+Requires:   libX11-devel(%{__isa_name}-32)
+Requires:   libXrender(%{__isa_name}-32)
+Requires:   libXrandr(%{__isa_name}-32)
+
+AutoReqProv:    no
+
 
 %description
 Put some description here.
