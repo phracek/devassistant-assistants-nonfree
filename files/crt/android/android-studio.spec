@@ -12,7 +12,6 @@ URL:		http://your.project.com
 Source0:	%{name}-bundle-%{version}-%{distro}.tgz
 Source1:	android-studio.xml
 Source2:	android-studio.desktop
-BuildRequires: chrpath
 Requires:   java-devel
 Requires:   glibc(%{__isa_name}-32)
 Requires:   glibc(%{__isa_name}-32)
@@ -44,8 +43,6 @@ cp -af ./bin/idea.png %{buildroot}%{_datadir}/pixmaps/%{name}/idea.png
 cp -af %{SOURCE1} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 cp -af %{SOURCE2} %{buildroot}%{_datadir}/android-studio.desktop
 ln -s %{_javadir}/%{name}/bin/studio.sh %{buildroot}%{_bindir}/studio
-ls %{buildroot}%{_javadir}/%{name}/sdk/tools/lib/monitor-x86_64/
-chrpath --delete %{buildroot}%{_javadir}/%{name}/sdk/tools/lib/monitor-x86_64/libcairo-swt.so
 desktop-file-install				\
 --add-category="Development"			\
 --delete-original				\
