@@ -42,13 +42,12 @@ mkdir -p %{buildroot}%{_bindir}
 cp -arf ./{lib,bin,license,plugins,sdk,LICENSE.txt} %{buildroot}%{_javadir}/%{name}/
 cp -af ./bin/idea.png %{buildroot}%{_datadir}/pixmaps/%{name}/idea.png
 cp -af %{SOURCE1} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
-cp -af %{SOURCE2} %{buildroot}%{_datadir}/android-studio.desktop
 ln -s %{_javadir}/%{name}/bin/studio.sh %{buildroot}%{_bindir}/studio
 desktop-file-install				\
 --add-category="Development"			\
 --delete-original				\
 --dir=%{buildroot}%{_datadir}/applications	\
-%{buildroot}%{_datadir}/android-studio.desktop
+%{SOURCE2}
 
 %files
 %defattr(-,root,root)
