@@ -12,6 +12,7 @@ URL:		http://your.project.com
 Source0:	%{name}-bundle-%{version}-%{distro}.tgz
 Source1:	android-studio.xml
 Source2:	android-studio.desktop
+BuildRequires: desktop-file-utils
 Requires:   java-devel
 Requires:   glibc(%{__isa_name}-32)
 Requires:   glibc(%{__isa_name}-32)
