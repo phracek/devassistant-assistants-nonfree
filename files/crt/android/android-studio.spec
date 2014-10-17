@@ -34,15 +34,15 @@ Can be multiline.
 %setup -q -n %{name}
 
 %install
-mkdir -p %{buildroot}%{_javadir}/%{name}
+mkdir -p %{buildroot}/opt/%{name}
 mkdir -p %{buildroot}%{_datadir}/pixmaps/%{name}
 mkdir -p %{buildroot}%{_datadir}/mime/packages
 mkdir -p %{buildroot}%{_bindir}
 
-cp -arf ./{lib,bin,license,plugins,sdk,LICENSE.txt} %{buildroot}%{_javadir}/%{name}/
+cp -arf ./{lib,bin,license,plugins,sdk,LICENSE.txt} %{buildroot}/opt/%{name}/
 cp -af ./bin/idea.png %{buildroot}%{_datadir}/pixmaps/%{name}/idea.png
 cp -af %{SOURCE1} %{buildroot}%{_datadir}/mime/packages/%{name}.xml
-ln -s %{_javadir}/%{name}/bin/studio.sh %{buildroot}%{_bindir}/studio
+ln -s /opt/%{name}/bin/studio.sh %{buildroot}%{_bindir}/studio
 desktop-file-install				\
 --add-category="Development"			\
 --delete-original				\
@@ -53,7 +53,7 @@ desktop-file-install				\
 %defattr(-,root,root)
 %doc LICENSE.txt
 %doc license/
-%{_javadir}/%{name}/*
+/opt/%{name}
 %{_bindir}/studio
 %{_datadir}/pixmaps/%{name}/idea.png
 %{_datadir}/mime/packages/%{name}.xml
