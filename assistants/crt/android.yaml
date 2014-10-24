@@ -78,6 +78,17 @@ run:
   - cl: sed -i "s|MyApplication|$basename|" app/build/intermediates/incremental/mergeResources/debug/merger.xml
   - cl: sed -i "s|MyApplication|$basename|" app/build/intermediates/res/debug/values/values.xml
   - cl: sed -i "s|MyApplication|$basename|" app/src/main/res/values/strings.xml
+  - $cldate~: $(LC_ALL=C date '+%a %b %d %Y')
+  - $clname~: $(git config user.name)
+  - if not $clname:
+    - $clname~: $(python -c 'import pwd,posix; print pwd.getpwuid(posix.getuid()).pw_gecos')
+  - $clemail~: $(git config user.email)
+  - if not $clemail:
+    - $clemail1~: $(id -un)
+    - $clemail2~: $(uname -n)
+    - $clemail~: "$clemail1@$clemail1"
+  - cl: sed -i "s|Fri Mar 15 2013 UserName <user@host>|$cldate $clname <$clemail>|" "$basename.spec"
+
   - use: git_init_add_commit.run
 - else:
   - cl: cd "$basename"
