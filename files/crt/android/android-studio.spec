@@ -60,5 +60,5 @@ desktop-file-install                        \
 %{_datadir}/applications/android-studio.desktop
 
 %changelog
-* Mon Sep 29 2014 Petr Hracek <phracek@redhat.com> 135.1339820-1
+* Fri Mar 15 2013 UserName <user@host> 135.1339820-1
 - First version
