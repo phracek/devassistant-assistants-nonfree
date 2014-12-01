@@ -4,10 +4,10 @@ description: The Android assistant will help you to install Android IDE environm
 dependencies:
 - rpm: ['ant'] # For building android applications
 # Packages needed for Android SDK
-- rpm: ['glibc.i686', 'glibc-devel.i686']
-- rpm: ['zlib-devel.i686', 'libstdc++.i686', 'ncurses-devel.i686', 'SDL.i686' ]
-- rpm: ['libX11-devel.i686', 'libXrandr.i686', 'libXrender.i686' , 'xz-libs.i686', 'libXxf86vm']
-- rpm: ['libXdamage.i686', 'libXfixes.i686']
+- rpm: ['glibc(x86-32)', 'glibc-devel(x86-32)']
+- rpm: ['zlib-devel(x86-32)', 'libstdc++(x86-32)', 'ncurses-devel(x86-32)', 'SDL(x86-32)' ]
+- rpm: ['libX11-devel(x86-32)', 'libXrandr(x86-32)', 'libXrender(x86-32)' , 'xz-libs(x86-32)', 'libXxf86vm']
+- rpm: ['libXdamage(x86-32)', 'libXfixes(x86-32)']
 - rpm: ['android-tools'] # ADB is required
 
 args:
